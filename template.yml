@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless::2016-10-31'
+
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+
+Resources:
+    CounterFunction:
+      Type: 'AWS::Serverless::Function'
+      Properties:
+        Handler: handler.counter
+        Runtime: nodejs16.x
+        CodeUri: CounterFunction/
+        Events:
+          API:
+            Type: Api
+            Properties:
+              Path: /konter/{id}
+              Method: GET
